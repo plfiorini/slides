@@ -1,78 +1,84 @@
-title: Slide Title
-subtitle: Subtitle
-class: image
+title: Goals
+class: big
 
-![Mobile vs desktop users](image.png)
+- Atomic and safe upgrades
+- Faster upgrades
+- Bundles instead of packages
+- Low footprint Wayland and QtQuick based desktop
+- Adapt to different form factors
 
 ---
 
-title: Segue Slide
-subtitle: Subtitle
+title: Maui
+subtitle: The Distro
 class: segue dark nobackground
 
 ---
 
-title: Agenda
+title: mauibuild
+subtitle: What it does now
+
+- Builds git repositories from core up to Hawaii, plus a few apps
+- Can build continuosly
+- Base system built from [Yocto](https://www.yoctoproject.org/)
+- Outputs different variants: runtime, runtime-debug, devel, devel-debug
+- Targets bare metal
+- Creates live images
+
+---
+
+title: mauibuild
+subtitle: Ideas for the future
+
+- Pick a more complete base system (i.e. Fedora minimal) and only build Qt and Hawaii
+- Focus on continuous integration and QA tests
+- Only target virtualized environments
+- No security updates
+
+---
+
+title: OSTree: git for operating system binaries
+
+- Manage a set of read-only, versioned and bootable file system trees
+- Pick the best out of package-based and images-based deployment
+- Drops flexibility of packages to gain image speed and reliability
+- Storage and file system independent (works on all file systems, LLVM, ...)
+- Can be served from static HTTP
+- Can boot different operating systems and bisect across builds
+- Can be used to update virtual guests while offline
+- Work in progress: yum integration
+
+---
+
+title: Bundles
+
+- ??
+
+---
+
+title: Hawaii
+subtitle: The Desktop
+class: segue dark nobackground
+
+---
+
+title: Philosophy
 class: big
-build_lists: true
 
-Things we'll cover (list should build):
-
-- Bullet1
-- Bullet2
-- Bullet3
+- Few dependencies
+- Submit changes upstream
 
 ---
 
-title: Today
-class: nobackground fill
+title: Few dependencies
 
-![Many kinds of devices.](image.png)
-
-<footer class="source">source: place source info here</footer>
+![Too much stuff](too_much_stuff_small.png)
 
 ---
 
-title: Big Title Slide
-class: title-slide
+title: Submit changes upstream
 
----
-
-title: Code Example
-
-Media Queries are sweet:
-
-<pre class="prettyprint" data-lang="css">
-@media screen and (max-width: 640px) {
-  #sidebar { display: none; }
-}
-</pre>
-
----
-
-title: Once more, with JavaScript
-
-<pre class="prettyprint" data-lang="javascript">
-function isSmall() {
-  return window.matchMedia("(min-device-width: ???)").matches;
-}
-
-function hasTouch() {
-  return Modernizr.touch;
-}
-
-function detectFormFactor() {
-  var device = DESKTOP;
-  if (hasTouch()) {
-    device = isSmall() ? PHONE : TABLET;
-  }
-  return device;
-}
-</pre>
-
----
-
-title: Centered content
-content_class: flexbox vcenter
-
-This content should be centered!
+- qtconfiguration - New configuration API with changes notifications
+- qtaccountsservice - Qt wrapper for AccountsService
+- fluid - Things missing from QtQuick Controls
+- greenisland - Goodies for QtQuick-based compositors
