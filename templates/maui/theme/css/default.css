@@ -98,6 +98,10 @@ body.loaded {
   opacity: 1 !important;
 }
 
+strong {
+  font-weight: bold;
+}
+
 /* line 78, ../scss/_base.scss */
 input, button {
   vertical-align: middle;

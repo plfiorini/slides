@@ -75,6 +75,11 @@ body {
   }
 }
 
+/* Reset style will remove bold weight from strong */
+strong {
+  font-weight: bold;
+}
+
 input, button {
   vertical-align: middle;
 }
