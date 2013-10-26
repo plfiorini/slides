@@ -1,18 +1,23 @@
 title: Goals
 class: big
 
-- Atomic and safe updates and upgrades
-- Faster updates: download only what's really changed
+Linux distribution:
+
+- Atomic, safe updates and upgrades
+- Download only what's changed, zlib compressed
 - Bundles instead of packages
+- Focused on Qt
+
+Desktop:
+
 - Low footprint Wayland and QtQuick based desktop
 - Adapt to different form factors
 - Fast boot
-- Focused on Qt
 
 ---
 
 title: Maui
-subtitle: The Distro
+subtitle: Linux distribution
 class: segue dark nobackground
 
 ---
@@ -22,11 +27,11 @@ title: OSTree: git for operating system binaries
 - Manage a set of read-only, versioned and bootable file system trees
 - Pick the best out of package-based and images-based deployment
 - Drops flexibility of packages to gain image speed and reliability
-- Storage and file system independent (works on all file systems, LLVM, ...)
 - Can be served from static HTTP
 - Can boot different operating systems and bisect across builds
+- Storage and file system independent (works on all file systems, LLVM, ...)
 - Can be used to update virtual guests while offline
-- Work in progress: yum integration
+- Work in progress: yum integration (see [here](http://fedorapeople.org/~walters/fedora-ostree/))
 
 ---
 
@@ -88,10 +93,10 @@ title: Maui atomic updates
 Advantages:
 
 - **If something fails at step 1 you won't reboot into a broken system**
-- Atomic updates and just one reboot
+- Updates are atomic, only one reboot
 - No need for rescue partitions or BTRFS snapshots
 - Ability to reboot into older version in case of regressions
-- Same workflow for **OS upgrades to the new release**
+- Same workflow for **upgrades to the new OS release**
 
 ---
 
@@ -99,41 +104,20 @@ title: Bundles
 
 - Multiple versions of the same application at the same time
 - OS updates decoupled from application updates
+- 1:1 relationship between a bundle and an application
+- Encourages ABI stability
+- Moves the packaging burden to the vendor
 
 ---
 
 title: Hawaii
-subtitle: The Desktop
+subtitle: Desktop Environment
 class: segue dark nobackground
-
----
-
-title: Features for 0.2.0
-
-- Launcher, Panel and paged AppChooser
-- Background with crossfade effect
-- Modal dialogs
-- Overlays
-- Multiple workspaces
-- Windows switcher
-- Exposé-like windows presentation
-- Lock screen
-- PolicyKit agent
-- Notifications
-- Audio master controls
-
----
-
-title: What's next?
-
-- Desktop elements
-- Grouped indicators and consolidate menu
 
 ---
 
 title: Philosophy
 class: big
-build_lists: true
 
 - Collaborate with upstream
 - Use as many modules as possible from KDE or other sources
@@ -145,6 +129,35 @@ build_lists: true
 
 ---
 
+title: Features on 0.1.9x
+
+- Multiple screens support
+- No primary and secondary outputs
+- Launcher, Panel and AppChooser on multiple pages
+- Background with crossfade effect
+- Modal dialogs, overlays and popups
+- Multiple workspaces and switcher
+- Windows switcher and Exposé-like presentation
+- Lock screen
+- PolicyKit agent
+- Notifications
+- Volume control keys
+- QML styles
+
+---
+
+title: What's next?
+
+- Animated wallpapers
+- Grouped indicators and consolidated menu
+- Improved applications and task management
+- Freedesktop.org Notifications 1.2
+- More preference modules: keyboard, mouse, screens, ...
+- Desktop elements
+- Ability to change layout and disposition at runtime
+
+---
+
 title: Few dependencies
 class: fill
 content_class: flexbox vcenter
@@ -153,7 +166,7 @@ content_class: flexbox vcenter
 
 ---
 
-title: Upstream collaboration
+title: Upstream collaboration and reusing
 
 - qtconfiguration - New configuration API with changes notifications
 - qtaccountsservice - Qt wrapper for AccountsService
@@ -162,6 +175,15 @@ title: Upstream collaboration
 - libqtxdg - Qt implementation of XDG standards
 - solid - Hardware abstraction layer from KDE
 - karchive - Archives framework from KDE
+
+---
+
+title: Low memory footprint
+content_class: flexbox vcenter
+
+**Consumes approximately 60:70 MB**
+
+![Low memory footprint](memusage.png)
 
 ---
 
@@ -186,3 +208,27 @@ OverlayStyle {
     }
 }
 </pre>
+
+---
+
+title: How do I get it?
+
+- Sources: [github.com/hawaii-desktop/hawaii](https://github.com/hawaii-desktop/hawaii)
+- AUR packages for Archlinux
+- Binary packages for Archlinux (x86_64) always updated
+- Fedora: coming soon
+
+---
+
+title: What can I do to contribute?
+
+- Coding (Qt, QML, C/C++)
+- UI, styles and Web design
+- Graphics (icon themes and such)
+- Wallpapers
+- Writing documentation (HIG, wiki, manuals, ...)
+- Web site (HTML and CSS)
+- Help organizing a community space with forums
+- Videos and marketing stuff
+- Spread the word
+- Donate some money
