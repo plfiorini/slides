@@ -129,7 +129,7 @@ class: big
 
 ---
 
-title: Features on 0.1.9x
+title: Features on 0.2.0
 
 - Multiple screens support
 - No primary and secondary outputs
@@ -142,19 +142,27 @@ title: Features on 0.1.9x
 - PolicyKit agent
 - Notifications
 - Volume control keys
+- Grouped indicators and consolidated menu
 - QML styles
+
+---
+
+title: Features for upcoming 0.2.1
+
+- Switch between different layouts
+- First step towards desktop and mobile convergence
+- Customizable layouts
+- Loadable elements and components
+- Screen saver
+- Animated wallpapers
 
 ---
 
 title: What's next?
 
-- Animated wallpapers
-- Grouped indicators and consolidated menu
 - Improved applications and task management
 - Freedesktop.org Notifications 1.2
 - More preference modules: keyboard, mouse, screens, ...
-- Desktop elements
-- Ability to change layout and disposition at runtime
 
 ---
 
