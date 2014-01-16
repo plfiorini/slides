@@ -131,8 +131,7 @@ class: big
 
 title: Features on 0.2.0
 
-- Multiple screens support
-- No primary and secondary outputs
+- Multiple screens support without primary and secondary outputs
 - Launcher, Panel and AppChooser on multiple pages
 - Background with crossfade effect
 - Modal dialogs, overlays and popups
@@ -152,9 +151,15 @@ title: Features for upcoming 0.2.1
 - Switch between different layouts
 - First step towards desktop and mobile convergence
 - Customizable layouts
-- Loadable elements and components
+- Loadable elements
+- Replaceable components (lock screen, ...)
+- More modularization
 - Screen saver
 - Animated wallpapers
+- Workspaces overview
+- Dropdown windows
+- Wayland/Weston 1.4 support
+- Possibly more core apps: Weather and Cinema
 
 ---
 
