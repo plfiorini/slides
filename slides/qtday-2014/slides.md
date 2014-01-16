@@ -160,6 +160,7 @@ title: Features for upcoming 0.2.1
 
 title: What's next?
 
+- Port SDDM to Wayland
 - Improved applications and task management
 - Freedesktop.org Notifications 1.2
 - More preference modules: keyboard, mouse, screens, ...
@@ -176,6 +177,7 @@ content_class: flexbox vcenter
 
 title: Upstream collaboration and reusing
 
+- sddm - QtQuick based login manager
 - qtconfiguration - New configuration API with changes notifications
 - qtaccountsservice - Qt wrapper for AccountsService
 - fluid - Things missing from QtQuick Controls
