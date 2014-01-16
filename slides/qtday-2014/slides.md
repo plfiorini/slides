@@ -223,7 +223,7 @@ OverlayStyle {
 
 title: How do I get it?
 
-- Sources: [github.com/hawaii-desktop/hawaii](https://github.com/hawaii-desktop/hawaii)
+- Sources: [github.com/mauios](https://github.com/mauios)
 - AUR packages for Archlinux
 - Binary packages for Archlinux (x86_64) always updated
 - Fedora: coming soon
