@@ -240,3 +240,5 @@ title: What can I do to contribute?
 - Videos and marketing stuff
 - Spread the word
 - Donate some money
+- Donate hardware, server, hosting
+- Sponsor development
