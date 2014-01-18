@@ -1,12 +1,18 @@
+title: What is Maui?
+
+Maui is a small Linux optimized for desktops
+with a custom user interface.
+
+---
+ 
 title: Goals
-class: big
 
 Linux distribution:
 
 - Atomic, safe updates and upgrades
 - Download only what's changed, zlib compressed
 - Bundles instead of packages
-- Focused on Qt
+- Focused on Qt and desktop needs
 
 Desktop:
 
@@ -19,6 +25,49 @@ Desktop:
 title: Maui
 subtitle: Linux distribution
 class: segue dark nobackground
+
+---
+
+title: Updates often gets in your way
+class: nobackground fill
+content_class: flexbox vcenter
+
+During yum update the system is in an inconsistent state
+
+![During an upgrade](during-upgrade.png)
+
+---
+
+title: systemd Offline System Updates
+
+Fedora implemented [offline updates](http://fedoraproject.org/wiki/Features/OfflineSystemUpdates) (more [here](http://freedesktop.org/wiki/Software/systemd/SystemUpdates/)):
+
+- Step 1: fetch updates
+- Step 2: reboot into a special "update mode"
+- Step 3: apply updates **(what happens if this fails?)**
+- Step 4: reboot into "regular mode"
+
+Downside:
+
+- Too many reboots
+- yum update can still break the system
+- Difference between OS and application updates is heuristic
+- Delta RPMs are per package not per tree diffs
+
+---
+
+title: Maui Atomic Updates
+
+- Step 1: fetch updates and apply them atomically
+- Step 2: reboot into the updated system
+
+Advantages:
+
+- **If something fails at step 1 you won't reboot into a broken system**
+- Updates are atomic, only one reboot
+- No need for rescue partitions or BTRFS snapshots
+- Ability to reboot into older version in case of regressions
+- Same workflow for **upgrades to the new OS release**
 
 ---
 
@@ -41,7 +90,7 @@ subtitle: What it does now
 - Builds git repositories from core up to Hawaii, plus a few apps
 - Can build continuosly
 - Base system built from [Yocto](https://www.yoctoproject.org/)
-- Outputs different variants: runtime, runtime-debug, devel, devel-debug
+- Outputs different trees: runtime, runtime-debug, devel, devel-debug
 - Targets bare metal
 - Creates live images
 
@@ -50,53 +99,10 @@ subtitle: What it does now
 title: mauibuild
 subtitle: Ideas for the future
 
-- Pick a more complete base system (i.e. Fedora minimal) and only build Qt and Hawaii
+- Pick a more complete base system (e.g. Mer, Fedora) and only build Qt and Hawaii
 - Focus on continuous integration, smoke tests and QA
 - Only target virtualized environments
 - No security updates
-
----
-
-title: Atomic upgrades
-class: nobackground fill
-content_class: flexbox vcenter
-
-Updates often break your system: this is during yum update
-
-![During an upgrade](during-upgrade.png)
-
----
-
-title: Fedora offline updates
-
-Fedora implemented [offline updates](http://fedoraproject.org/wiki/Features/OfflineSystemUpdates) (more [here](http://freedesktop.org/wiki/Software/systemd/SystemUpdates/)):
-
-- Step 1: fetch updates
-- Step 2: reboot into a special "update mode"
-- Step 3: apply updates **(what happens if this fails?)**
-- Step 4: reboot into "regular mode"
-
-Downside:
-
-- Too many reboots
-- yum update can still break the system
-- Difference between OS and application updates is heuristic
-- Delta RPMs are per package not per tree diffs
-
----
-
-title: Maui atomic updates
-
-- Step 1: fetch updates and apply them atomically
-- Step 2: reboot into the updated system
-
-Advantages:
-
-- **If something fails at step 1 you won't reboot into a broken system**
-- Updates are atomic, only one reboot
-- No need for rescue partitions or BTRFS snapshots
-- Ability to reboot into older version in case of regressions
-- Same workflow for **upgrades to the new OS release**
 
 ---
 
@@ -120,12 +126,29 @@ title: Philosophy
 class: big
 
 - Collaborate with upstream
-- Use as many modules as possible from KDE or other sources
+- Reuse other libraries when possible
 - Avoid unnecessary or bloated stuff
-- Only support Wayland and Linux
+- Only support Wayland
 - Adapt to diffent form factors
 - Modular desktop with components
 - Easy and reliable API for styles
+
+---
+
+title: Few dependencies
+class: fill
+content_class: flexbox vcenter
+
+![Too much stuff](too_much_stuff.png)
+
+---
+
+title: Low memory footprint
+content_class: flexbox vcenter
+
+**Consumes approximately 60:70 MB**
+
+![Low memory footprint](memusage.png)
 
 ---
 
@@ -172,36 +195,6 @@ title: What's next?
 
 ---
 
-title: Few dependencies
-class: fill
-content_class: flexbox vcenter
-
-![Too much stuff](too_much_stuff.png)
-
----
-
-title: Upstream collaboration and reusing
-
-- sddm - QtQuick based login manager
-- qtconfiguration - New configuration API with changes notifications
-- qtaccountsservice - Qt wrapper for AccountsService
-- fluid - Things missing from QtQuick Controls
-- greenisland - Goodies for QtQuick-based compositors
-- libqtxdg - Qt implementation of XDG standards
-- solid - Hardware abstraction layer from KDE
-- karchive - Archives framework from KDE
-
----
-
-title: Low memory footprint
-content_class: flexbox vcenter
-
-**Consumes approximately 60:70 MB**
-
-![Low memory footprint](memusage.png)
-
----
-
 title: Styles
 
 <pre class="prettyprint" data-lang="qml">
@@ -229,13 +222,13 @@ OverlayStyle {
 title: How do I get it?
 
 - Sources: [github.com/mauios](https://github.com/mauios)
-- AUR packages for Archlinux
-- Binary packages for Archlinux (x86_64) always updated
+- AUR packages for Arch Linux
+- Binary packages for Arch Linux (x86_64) always updated
 - Fedora: coming soon
 
 ---
 
-title: What can I do to contribute?
+title: What you can do to contribute
 
 - Coding (Qt, QML, C/C++)
 - UI, styles and Web design
