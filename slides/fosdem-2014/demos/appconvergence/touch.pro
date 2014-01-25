@@ -3,7 +3,9 @@ TARGET = touch
 !android: !ios: !blackberry: qtHaveModule(widgets): QT += widgets
 
 include(src/src.pri)
-include(../shared/shared.pri)
+
+SOURCES += \
+    qtquickcontrolsapplication.h
 
 OTHER_FILES += \
     main.qml \
