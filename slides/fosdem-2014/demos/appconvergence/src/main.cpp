@@ -1,5 +1,6 @@
 /****************************************************************************
 **
+** Copyright (C) 2014 Pier Luigi Fiorini.
 ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
@@ -39,11 +40,20 @@
 ****************************************************************************/
 
 #include "qtquickcontrolsapplication.h"
+#include <QtCore/QFileSelector>
 #include <QtQml/QQmlApplicationEngine>
 
 int main(int argc, char *argv[])
 {
     QtQuickControlsApplication app(argc, argv);
-    QQmlApplicationEngine engine(QUrl("qrc:/main.qml"));
+
+    QStringList extraSelectors;
+    extraSelectors << "desktop";
+
+    QFileSelector selector;
+    selector.setExtraSelectors(extraSelectors);
+
+    QQmlApplicationEngine engine(selector.select(QUrl("qrc:/main.qml")));
+
     return app.exec();
 }
