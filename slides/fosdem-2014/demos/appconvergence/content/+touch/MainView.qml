@@ -1,5 +1,6 @@
 /****************************************************************************
 **
+** Copyright (C) 2014 Pier Luigi Fiorini.
 ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
@@ -40,13 +41,8 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.1
-import "content"
 
-ApplicationWindow {
-    visible: true
-    width: 800
-    height: 1280
-
+Item {
     Rectangle {
         color: "#212126"
         anchors.fill: parent
@@ -62,7 +58,7 @@ ApplicationWindow {
         }
     }
 
-    toolBar: BorderImage {
+    property Item toolBar: BorderImage {
         border.bottom: 8
         source: "images/toolbar.png"
         width: parent.width
@@ -106,27 +102,27 @@ ApplicationWindow {
         id: pageModel
         ListElement {
             title: "Buttons"
-            page: "content/ButtonPage.qml"
+            page: "ButtonPage.qml"
         }
         ListElement {
             title: "Sliders"
-            page: "content/SliderPage.qml"
+            page: "SliderPage.qml"
         }
         ListElement {
             title: "ProgressBar"
-            page: "content/ProgressBarPage.qml"
+            page: "ProgressBarPage.qml"
         }
         ListElement {
             title: "Tabs"
-            page: "content/TabBarPage.qml"
+            page: "TabBarPage.qml"
         }
         ListElement {
             title: "TextInput"
-            page: "content/TextInputPage.qml"
+            page: "TextInputPage.qml"
         }
         ListElement {
             title: "List"
-            page: "content/ListPage.qml"
+            page: "ListPage.qml"
         }
     }
 

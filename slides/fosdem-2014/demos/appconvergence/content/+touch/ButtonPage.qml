@@ -70,36 +70,106 @@ Item {
         spacing: 40
         anchors.centerIn: parent
 
-        TextField {
-            anchors.margins: 20
-            text: "Text input"
+        Button {
+            text: "Press me"
             style: touchStyle
         }
 
-        TextField {
-            anchors.margins: 20
-            text: "Readonly Text input"
+        Button {
             style: touchStyle
-            readOnly: true
+            text: "Press me too"
         }
+
+        Button {
+            anchors.margins: 20
+            style: touchStyle
+            text: "Dont press me"
+            onClicked: if (stackView) stackView.pop()
+        }
+
+        Row {
+            spacing: 20
+            Switch {
+                style: switchStyle
+            }
+            Switch {
+                style: switchStyle
+            }
+        }
+
     }
+
     Component {
         id: touchStyle
-
-        TextFieldStyle {
-            textColor: "white"
-            font.pixelSize: 28
-            background: Item {
+        ButtonStyle {
+            panel: Item {
                 implicitHeight: 50
                 implicitWidth: 320
                 BorderImage {
-                    source: "../images/textinput.png"
+                    anchors.fill: parent
+                    antialiasing: true
+                    border.bottom: 8
+                    border.top: 8
                     border.left: 8
                     border.right: 8
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    anchors.margins: control.pressed ? -4 : 0
+                    source: control.pressed ? "images/button_pressed.png" : "images/button_default.png"
+                    Text {
+                        text: control.text
+                        anchors.centerIn: parent
+                        color: "white"
+                        font.pixelSize: 23
+                        renderType: Text.NativeRendering
+                    }
                 }
+            }
+        }
+    }
+
+    Component {
+        id: switchStyle
+        SwitchStyle {
+
+            groove: Rectangle {
+                implicitHeight: 50
+                implicitWidth: 152
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
+                    width: parent.width/2 - 2
+                    height: 20
+                    anchors.margins: 2
+                    color: control.checked ? "#468bb7" : "#222"
+                    Behavior on color {ColorAnimation {}}
+                    Text {
+                        font.pixelSize: 23
+                        color: "white"
+                        anchors.centerIn: parent
+                        text: "ON"
+                    }
+                }
+                Item {
+                    width: parent.width/2
+                    height: parent.height
+                    anchors.right: parent.right
+                    Text {
+                        font.pixelSize: 23
+                        color: "white"
+                        anchors.centerIn: parent
+                        text: "OFF"
+                    }
+                }
+                color: "#222"
+                border.color: "#444"
+                border.width: 2
+            }
+            handle: Rectangle {
+                width: parent.parent.width/2
+                height: control.height
+                color: "#444"
+                border.color: "#555"
+                border.width: 2
             }
         }
     }
