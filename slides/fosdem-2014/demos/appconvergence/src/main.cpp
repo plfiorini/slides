@@ -39,15 +39,14 @@
 **
 ****************************************************************************/
 
-#define USE_FILE_SELECTOR 0
-
-#include "qtquickcontrolsapplication.h"
 #include <QtCore/QCommandLineParser>
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtQml/QQmlAbstractUrlInterceptor>
 #include <QtQml/QQmlApplicationEngine>
+
+#include "qtquickcontrolsapplication.h"
 
 Q_LOGGING_CATEGORY(APPCONVERGENCE, "appconvergence")
 
