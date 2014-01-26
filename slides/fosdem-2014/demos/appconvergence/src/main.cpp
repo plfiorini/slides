@@ -31,13 +31,15 @@
 #include <QtQml/QQmlApplicationEngine>
 
 #include "qtquickcontrolsapplication.h"
+#include "watcher.h"
 
 Q_LOGGING_CATEGORY(APPCONVERGENCE, "appconvergence")
 
-class ConvergenceInterceptor : public QQmlAbstractUrlInterceptor
+class ConvergenceInterceptor : public QObject, public QQmlAbstractUrlInterceptor
 {
+    Q_OBJECT
 public:
-    ConvergenceInterceptor();
+    ConvergenceInterceptor(QObject *parent = 0);
 
     void setBasePath(const QString &path);
     void setPlatformHints(const QStringList &hints);
@@ -46,13 +48,25 @@ public:
 
     QUrl intercept(const QUrl &url, DataType type);
 
+signals:
+    void reload(const QString &filePath);
+
 private:
     QDir m_basePath;
     QStringList m_hints;
+    Watcher *m_watcher;
+
+private slots:
+    void hintsChanged(const QStringList &hints);
 };
 
-ConvergenceInterceptor::ConvergenceInterceptor()
+ConvergenceInterceptor::ConvergenceInterceptor(QObject *parent)
+    : QObject(parent)
+    , QQmlAbstractUrlInterceptor()
 {
+    m_watcher = new Watcher(this);
+    connect(m_watcher, &Watcher::hintsChanged,
+            this, &ConvergenceInterceptor::hintsChanged);
 }
 
 void ConvergenceInterceptor::setBasePath(const QString &path)
@@ -117,6 +131,17 @@ QUrl ConvergenceInterceptor::intercept(const QUrl &url, QQmlAbstractUrlIntercept
     return url;
 }
 
+void ConvergenceInterceptor::hintsChanged(const QStringList &hints)
+{
+    // Let's see if hints are changed...
+    if (m_hints != hints) {
+        // Ok, so hints are indeed change now we tell the engine that we want to reload
+        // the main QML file
+        qDebug() << hints;
+        emit reload(filePath("main.qml"));
+    }
+}
+
 int main(int argc, char *argv[])
 {
     QtQuickControlsApplication app(argc, argv);
@@ -150,6 +175,10 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.setUrlInterceptor(&interceptor);
+
+    QObject::connect(&interceptor, SIGNAL(reload(QString)),
+                     &engine, SLOT(load(QString)));
+
     engine.load(QUrl::fromLocalFile(interceptor.filePath("main.qml")));
 
     return app.exec();

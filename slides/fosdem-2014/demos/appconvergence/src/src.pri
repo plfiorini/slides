@@ -1,2 +1,6 @@
 SOURCES += \
-    $$PWD/main.cpp
+    $$PWD/main.cpp \
+    src/watcher.cpp
+
+HEADERS += \
+    src/watcher.h

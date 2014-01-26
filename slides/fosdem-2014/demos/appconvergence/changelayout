@@ -1,0 +1,14 @@
+#!/bin/bash
+layout="$1"
+
+case $layout in
+"desktop")
+    echo desktop > /tmp/appconvergence.lst
+;;
+"phone")
+    echo -en "touch\nphone\n" > /tmp/appconvergence.lst
+;;
+"tablet")
+    echo -en "touch\ntablet\n" > /tmp/appconvergence.lst
+;;
+esac
