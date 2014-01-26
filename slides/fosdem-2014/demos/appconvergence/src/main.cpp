@@ -91,6 +91,13 @@ QUrl ConvergenceInterceptor::intercept(const QUrl &url, QQmlAbstractUrlIntercept
     if (type == QQmlAbstractUrlInterceptor::QmldirFile)
         return url;
 
+    // Rewrite app:// URLs
+    if (url.scheme() == "app") {
+        QUrl newUrl = QUrl::fromLocalFile(filePath(QString(".%1").arg(url.path())));
+        qCDebug(APPCONVERGENCE) << "Rewrite" << url.toString() << "to" << newUrl.toString();
+        return newUrl;
+    }
+
     if (type == QQmlAbstractUrlInterceptor::QmlFile || type == QQmlAbstractUrlInterceptor::JavaScriptFile) {
         // Rewrite only URLs relative to our base path
         if (url.path().startsWith(m_basePath.absolutePath())) {
