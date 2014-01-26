@@ -67,24 +67,15 @@ Item {
         spacing: 40
         anchors.centerIn: parent
 
-        Button {
-            text: "Press me"
-        }
-
-        Button {
-            text: "Press me too"
-        }
-
-        Button {
+        TextField {
             anchors.margins: 20
-            text: "Dont press me"
-            onClicked: if (stackView) stackView.pop()
+            text: "Text input"
         }
 
-        Row {
-            spacing: 20
-            Switch {}
-            Switch {}
+        TextField {
+            anchors.margins: 20
+            text: "Readonly Text input"
+            readOnly: true
         }
     }
 }

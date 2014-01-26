@@ -1,5 +1,6 @@
 /****************************************************************************
 **
+** Copyright (C) 2014 Pier Luigi Fiorini.
 ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
@@ -38,11 +39,8 @@
 **
 ****************************************************************************/
 
-
-
-
-
 import QtQuick 2.1
+import QtQuick.Controls 1.1
 
 Item {
     id: root
@@ -58,29 +56,12 @@ Item {
         visible: mouse.pressed
     }
 
-    Text {
+    Label {
         id: textitem
-        color: "white"
-        font.pixelSize: 32
         text: modelData
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 30
-    }
-
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.margins: 15
-        height: 1
-        color: "#424246"
-    }
-
-    Image {
-        anchors.right: parent.right
-        anchors.rightMargin: 20
-        anchors.verticalCenter: parent.verticalCenter
-        source: "images/navigation_next_item.png"
     }
 
     MouseArea {

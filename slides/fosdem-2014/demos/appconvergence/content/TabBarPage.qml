@@ -47,44 +47,19 @@ Item {
     width: parent.width
     height: parent.height
 
-    property real progress: 0
-    SequentialAnimation on progress {
-        loops: Animation.Infinite
-        running: true
-        NumberAnimation {
-            from: 0
-            to: 1
-            duration: 3000
+    TabView {
+        anchors.fill: parent
+        Tab {
+            title: "Buttons"
+            ButtonPage{ visible: true }
         }
-        NumberAnimation {
-            from: 1
-            to: 0
-            duration: 3000
+        Tab {
+            title: "Sliders"
+            SliderPage{ visible: true }
         }
-    }
-
-    Column {
-        spacing: 40
-        anchors.centerIn: parent
-
-        Button {
-            text: "Press me"
-        }
-
-        Button {
-            text: "Press me too"
-        }
-
-        Button {
-            anchors.margins: 20
-            text: "Dont press me"
-            onClicked: if (stackView) stackView.pop()
-        }
-
-        Row {
-            spacing: 20
-            Switch {}
-            Switch {}
+        Tab {
+            title: "Progress"
+            ProgressBarPage{ visible: true }
         }
     }
 }

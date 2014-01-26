@@ -13,6 +13,9 @@ OTHER_FILES += \
     content/MainView.qml \
     content/ButtonPage.qml \
     content/AndroidDelegate.qml \
+    content/ListPage.qml \
+    content/TabBarPage.qml \
+    content/TextInputPage.qml \
     content/components/SwipeArea.qml \
     content/components/PageModel.qml \
     content/main.qml \

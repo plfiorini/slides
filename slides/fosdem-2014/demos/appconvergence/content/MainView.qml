@@ -33,7 +33,51 @@
 ****************************************************************************/
 
 import QtQuick 2.1
+import QtQuick.Controls 1.1
+import QtQuick.Layouts 1.1
+import "app:///components" as Components
 
-Rectangle {
-    color: "red"
+Item {
+    property Item toolBar: ToolBar {
+        RowLayout {
+            ToolButton {
+                iconName: "go-previous"
+                enabled: stackView.depth > 1
+                onClicked: stackView.pop()
+            }
+        }
+    }
+
+    Components.PageModel {
+        id: pageModel
+    }
+
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        initialItem: Item {
+            width: parent.width
+            height: parent.height
+
+            GroupBox {
+                anchors.fill: parent
+                title: "Choose a page"
+
+                Flow {
+                    anchors.fill: parent
+                    anchors.margins: 20
+                    spacing: 50
+
+                    Repeater {
+                        model: pageModel
+
+                        Button {
+                            text: title
+                            onClicked: stackView.push(Qt.resolvedUrl(page))
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

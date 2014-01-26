@@ -44,8 +44,8 @@ import QtQuick.Controls 1.1
 
 ApplicationWindow {
     visible: true
-    width: 800
-    height: 1280
+    width: 640
+    height: 480
     toolBar: mainView.toolBar
 
     MainView {
