@@ -42,6 +42,8 @@
 #ifndef QTQUICKCONTROLSAPPLICATION_H
 #define QTQUICKCONTROLSAPPLICATION_H
 
+#include <QtCore/QLoggingCategory>
+
 #ifdef QT_WIDGETS_LIB
 #include <QtWidgets/QApplication>
 #else
@@ -55,6 +57,8 @@ QT_BEGIN_NAMESPACE
 #else
 #define QtQuickControlsApplication QGuiApplication
 #endif
+
+Q_DECLARE_LOGGING_CATEGORY(APPCONVERGENCE)
 
 QT_END_NAMESPACE
 

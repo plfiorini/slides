@@ -49,6 +49,8 @@
 #include <QtQml/QQmlAbstractUrlInterceptor>
 #include <QtQml/QQmlApplicationEngine>
 
+Q_LOGGING_CATEGORY(APPCONVERGENCE, "appconvergence")
+
 class ConvergenceInterceptor : public QQmlAbstractUrlInterceptor
 {
 public:
@@ -102,7 +104,7 @@ QUrl ConvergenceInterceptor::intercept(const QUrl &url, QQmlAbstractUrlIntercept
                 //qDebug() << "Trying" << newPath;
                 if (QFile::exists(newPath)) {
                     QUrl newUrl = QUrl::fromLocalFile(newPath);
-                    qDebug() << "Rewrite" << url.toString() << "to" << newUrl.toString();
+                    qCDebug(APPCONVERGENCE) << "Rewrite" << url.toString() << "to" << newUrl.toString();
                     return newUrl;
                 }
             }
@@ -114,13 +116,13 @@ QUrl ConvergenceInterceptor::intercept(const QUrl &url, QQmlAbstractUrlIntercept
             QString newPath = m_basePath.absoluteFilePath(relativePath);
             if (QFile::exists(newPath)) {
                 QUrl newUrl = QUrl::fromLocalFile(newPath);
-                qDebug() << "Rewrite" << url.toString() << "to" << newUrl.toString();
+                qCDebug(APPCONVERGENCE) << "Rewrite" << url.toString() << "to" << newUrl.toString();
                 return newUrl;
             }
         }
     }
 
-    qDebug() << url.toString();
+    qCDebug(APPCONVERGENCE) << "Not rewritten:" << url.toString();
 
     return url;
 }
@@ -135,7 +137,17 @@ int main(int argc, char *argv[])
     parser.setApplicationDescription(app.translate("main", "Demo for convergence"));
     parser.addHelpOption();
     parser.addVersionOption();
+
+    QCommandLineOption verboseOption("verbose",
+                                     app.translate("main", "Verbose output"));
+    parser.addOption(verboseOption);
+
     parser.process(app);
+
+    if (parser.isSet(verboseOption))
+        QLoggingCategory::setFilterRules("appconvergence.debug=true");
+    else
+        QLoggingCategory::setFilterRules("appconvergence.debug=false");
 
     QStringList hints;
     hints << "touch" << "tablet";
