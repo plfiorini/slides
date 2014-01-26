@@ -42,6 +42,7 @@
 #define USE_FILE_SELECTOR 0
 
 #include "qtquickcontrolsapplication.h"
+#include <QtCore/QCommandLineParser>
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
@@ -127,6 +128,14 @@ QUrl ConvergenceInterceptor::intercept(const QUrl &url, QQmlAbstractUrlIntercept
 int main(int argc, char *argv[])
 {
     QtQuickControlsApplication app(argc, argv);
+    app.setApplicationName("appconvergence");
+    app.setApplicationVersion("1.0");
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription(app.translate("main", "Demo for convergence"));
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.process(app);
 
     QStringList hints;
     hints << "touch" << "tablet";
