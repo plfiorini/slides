@@ -14,6 +14,7 @@ OTHER_FILES += \
     content/ButtonPage.qml \
     content/AndroidDelegate.qml \
     content/components/SwipeArea.qml \
+    content/components/PageModel.qml \
     content/main.qml \
     content/+tablet/MainView.qml \
     content/+tablet/main.qml \

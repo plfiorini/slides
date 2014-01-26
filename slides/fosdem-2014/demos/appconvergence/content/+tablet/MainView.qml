@@ -161,32 +161,8 @@ Item {
         }
     }
 
-    ListModel {
+    Components.PageModel {
         id: pageModel
-        ListElement {
-            title: "Buttons"
-            page: "ButtonPage.qml"
-        }
-        ListElement {
-            title: "Sliders"
-            page: "SliderPage.qml"
-        }
-        ListElement {
-            title: "ProgressBar"
-            page: "ProgressBarPage.qml"
-        }
-        ListElement {
-            title: "Tabs"
-            page: "TabBarPage.qml"
-        }
-        ListElement {
-            title: "TextInput"
-            page: "TextInputPage.qml"
-        }
-        ListElement {
-            title: "List"
-            page: "ListPage.qml"
-        }
     }
 
     Rectangle {

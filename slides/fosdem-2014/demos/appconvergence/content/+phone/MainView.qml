@@ -41,6 +41,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.1
+import "app:///components" as Components
 import "app:///code/fontawesome.js" as FontAwesome
 
 Item {
@@ -107,32 +108,8 @@ Item {
         }
     }
 
-    ListModel {
+    Components.PageModel {
         id: pageModel
-        ListElement {
-            title: "Buttons"
-            page: "ButtonPage.qml"
-        }
-        ListElement {
-            title: "Sliders"
-            page: "SliderPage.qml"
-        }
-        ListElement {
-            title: "ProgressBar"
-            page: "ProgressBarPage.qml"
-        }
-        ListElement {
-            title: "Tabs"
-            page: "TabBarPage.qml"
-        }
-        ListElement {
-            title: "TextInput"
-            page: "TextInputPage.qml"
-        }
-        ListElement {
-            title: "List"
-            page: "ListPage.qml"
-        }
     }
 
     StackView {
