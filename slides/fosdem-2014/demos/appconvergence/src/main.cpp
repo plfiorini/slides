@@ -39,21 +39,105 @@
 **
 ****************************************************************************/
 
+#define USE_FILE_SELECTOR 0
+
 #include "qtquickcontrolsapplication.h"
-#include <QtCore/QFileSelector>
+#include <QtCore/QDebug>
+#include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtQml/QQmlAbstractUrlInterceptor>
 #include <QtQml/QQmlApplicationEngine>
+
+class ConvergenceInterceptor : public QQmlAbstractUrlInterceptor
+{
+public:
+    ConvergenceInterceptor();
+
+    void setBasePath(const QString &path);
+    void setPlatformHints(const QStringList &hints);
+
+    QString filePath(const QString &fileName) const;
+
+    QUrl intercept(const QUrl &url, DataType type);
+
+private:
+    QDir m_basePath;
+    QStringList m_hints;
+};
+
+ConvergenceInterceptor::ConvergenceInterceptor()
+{
+}
+
+void ConvergenceInterceptor::setBasePath(const QString &path)
+{
+    m_basePath = path;
+}
+
+void ConvergenceInterceptor::setPlatformHints(const QStringList &hints)
+{
+    m_hints = hints;
+}
+
+QString ConvergenceInterceptor::filePath(const QString &fileName) const
+{
+    return m_basePath.filePath(fileName);
+}
+
+QUrl ConvergenceInterceptor::intercept(const QUrl &url, QQmlAbstractUrlInterceptor::DataType type)
+{
+    if (type == QQmlAbstractUrlInterceptor::QmldirFile)
+        return url;
+
+    if (type == QQmlAbstractUrlInterceptor::QmlFile || type == QQmlAbstractUrlInterceptor::JavaScriptFile) {
+        // Rewrite only URLs relative to our base path
+        if (url.path().startsWith(m_basePath.absolutePath())) {
+            // Extract relative URL
+            QString relativePath = url.path().mid(m_basePath.absolutePath().length());
+
+            for (int i = 0; i < m_hints.size(); i++) {
+                // Check whether this relative path exist in the hint domain
+                QString newPath = m_basePath.absoluteFilePath("+" + m_hints.at(i) + relativePath);
+                //qDebug() << "Trying" << newPath;
+                if (QFile::exists(newPath)) {
+                    QUrl newUrl = QUrl::fromLocalFile(newPath);
+                    qDebug() << "Rewrite" << url.toString() << "to" << newUrl.toString();
+                    return newUrl;
+                }
+            }
+        }
+    } else {
+        // Rewrite local URLs relative to the base path
+        if (url.isLocalFile()) {
+            QString relativePath = url.path().mid(m_basePath.absolutePath().length());
+            QString newPath = m_basePath.absoluteFilePath(relativePath);
+            if (QFile::exists(newPath)) {
+                QUrl newUrl = QUrl::fromLocalFile(newPath);
+                qDebug() << "Rewrite" << url.toString() << "to" << newUrl.toString();
+                return newUrl;
+            }
+        }
+    }
+
+    qDebug() << url.toString();
+
+    return url;
+}
 
 int main(int argc, char *argv[])
 {
     QtQuickControlsApplication app(argc, argv);
 
-    QStringList extraSelectors;
-    extraSelectors << "desktop";
+    QStringList hints;
+    hints << "touch" << "tablet";
 
-    QFileSelector selector;
-    selector.setExtraSelectors(extraSelectors);
+    ConvergenceInterceptor interceptor;
+    interceptor.setBasePath(QCoreApplication::applicationDirPath() + "/content");
+    interceptor.setPlatformHints(hints);
 
-    QQmlApplicationEngine engine(selector.select(QUrl("qrc:/main.qml")));
+    QQmlApplicationEngine engine;
+    engine.setUrlInterceptor(&interceptor);
+    engine.load(QUrl::fromLocalFile(interceptor.filePath("main.qml")));
 
     return app.exec();
 }
