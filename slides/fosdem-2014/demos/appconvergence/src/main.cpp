@@ -141,6 +141,9 @@ int main(int argc, char *argv[])
                                      app.translate("main", "Verbose output"));
     parser.addOption(verboseOption);
 
+    parser.addPositionalArgument("hints",
+                                 app.translate("main", "List of hints"));
+
     parser.process(app);
 
     if (parser.isSet(verboseOption))
@@ -148,8 +151,7 @@ int main(int argc, char *argv[])
     else
         QLoggingCategory::setFilterRules("appconvergence.debug=false");
 
-    QStringList hints;
-    hints << "touch" << "tablet";
+    const QStringList hints = parser.positionalArguments();
 
     ConvergenceInterceptor interceptor;
     interceptor.setBasePath(QCoreApplication::applicationDirPath() + "/content");
