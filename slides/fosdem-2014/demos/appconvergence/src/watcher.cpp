@@ -41,12 +41,10 @@ void Watcher::fileChanged(const QString &fileName)
 {
     QFile file(fileName);
     if (file.open(QIODevice::ReadOnly)) {
-        QList<QByteArray> data = file.readAll().split('\n');
+        QByteArray data = file.readAll();
         file.close();
 
-        QStringList hints;
-        for (int i = 0; i < data.size(); i++)
-            hints << data.at(i).constData();
+        QStringList hints = QString(data).split('\n', QString::SkipEmptyParts);
         Q_EMIT hintsChanged(hints);
     }
 }
