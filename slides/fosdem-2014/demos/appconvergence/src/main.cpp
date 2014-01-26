@@ -108,7 +108,7 @@ QUrl ConvergenceInterceptor::intercept(const QUrl &url, QQmlAbstractUrlIntercept
         }
     } else {
         // Rewrite local URLs relative to the base path
-        if (url.isLocalFile()) {
+        if (url.path().startsWith(m_basePath.absolutePath()) && url.isLocalFile()) {
             QString relativePath = url.path().mid(m_basePath.absolutePath().length());
             QString newPath = m_basePath.absoluteFilePath(relativePath);
             if (QFile::exists(newPath)) {
