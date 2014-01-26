@@ -41,11 +41,16 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.1
+import "app:///code/fontawesome.js" as FontAwesome
 
 Item {
     Rectangle {
         color: "#212126"
         anchors.fill: parent
+    }
+
+    FontLoader {
+        source: "app:///fonts/fontawesome-webfont.ttf"
     }
 
     // Implements back key navigation
@@ -76,9 +81,13 @@ Item {
             radius: 4
             color: backmouse.pressed ? "#222" : "transparent"
             Behavior on opacity { NumberAnimation{} }
-            Image {
-                anchors.verticalCenter: parent.verticalCenter
-                source: "images/navigation_previous_item.png"
+            Text {
+                anchors.centerIn: parent
+                text: FontAwesome.Icon.ChevronLeft
+                font.family: "FontAwesome"
+                font.pointSize: 32
+                color: "white"
+                smooth: true
             }
             MouseArea {
                 id: backmouse
