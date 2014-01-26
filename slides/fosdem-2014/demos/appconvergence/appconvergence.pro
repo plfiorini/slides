@@ -26,4 +26,5 @@ OTHER_FILES += \
     content/+touch/AndroidDelegate.qml \
     content/+touch/SliderPage.qml \
     content/+touch/TextInputPage.qml \
+    content/+phone/MainView.qml \
     content/+phone/main.qml \
