@@ -1,5 +1,5 @@
 QT += qml quick
-TARGET = touch
+TARGET = appconvergence
 !android: !ios: !blackberry: qtHaveModule(widgets): QT += widgets
 
 include(src/src.pri)
