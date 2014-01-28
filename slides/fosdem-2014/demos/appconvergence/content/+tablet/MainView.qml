@@ -245,8 +245,10 @@ Item {
             height: parent.height
 
             Label {
-                text: "TEST"
-                font.pixelSize: 32
+                anchors.centerIn: parent
+                text: "Hello FOSDEM!"
+                font.pixelSize: 64
+                color: "white"
             }
         }
     }
