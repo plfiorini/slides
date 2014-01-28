@@ -1,30 +1,25 @@
-title: What is Maui?
-
-Maui is a small Linux optimized for desktops
-with a custom user interface.
+title: Me
 
 ---
- 
-title: Goals
 
-Linux distribution:
+title: What is this stuff?
 
-- Atomic, safe updates and upgrades
+Maui:
+
+- Convenient way to distribute the desktop
+- GNU/Linux stack, Qt, Hawaii
+- Atomic, safe updates and upgrades (OSTree)
 - Download only what's changed, zlib compressed
 - Bundles instead of packages
 - Focused on Qt and desktop needs
 
-Desktop:
+Hawaii:
 
 - Low footprint Wayland and QtQuick based desktop
-- Adapt to different form factors
-- Fast boot
-
----
-
-title: Maui
-subtitle: Linux distribution
-class: segue dark nobackground
+- Modular, less dependencies
+- Adapt to different devices
+- Customizable layouts
+- Easier styling
 
 ---
 
@@ -32,31 +27,13 @@ title: Updates often gets in your way
 class: nobackground fill
 content_class: flexbox vcenter
 
-During yum update the system is in an inconsistent state
+This is during yum update: the system is in an inconsistent state
 
 ![During an upgrade](during-upgrade.png)
 
 ---
 
-title: systemd Offline System Updates
-
-Fedora implemented [offline updates](http://fedoraproject.org/wiki/Features/OfflineSystemUpdates) (more [here](http://freedesktop.org/wiki/Software/systemd/SystemUpdates/)):
-
-- Step 1: fetch updates
-- Step 2: reboot into a special "update mode"
-- Step 3: apply updates **(what happens if this fails?)**
-- Step 4: reboot into "regular mode"
-
-Downside:
-
-- Too many reboots
-- yum update can still break the system
-- Difference between OS and application updates is heuristic
-- Delta RPMs are per package not per tree diffs
-
----
-
-title: Maui Atomic Updates
+title: Updates
 
 - Step 1: fetch updates and apply them atomically
 - Step 2: reboot into the updated system
@@ -71,25 +48,12 @@ Advantages:
 
 ---
 
-title: OSTree: git for operating system binaries
-
-- Manage a set of read-only, versioned and bootable file system trees
-- Pick the best out of package-based and images-based deployment
-- Drops flexibility of packages to gain image speed and reliability
-- Can be served from static HTTP
-- Can boot different operating systems and bisect across builds
-- Storage and file system independent (works on all file systems, LLVM, ...)
-- Can be used to update virtual guests while offline
-- Work in progress: yum integration (see [here](http://fedorapeople.org/~walters/fedora-ostree/))
-
----
-
 title: mauibuild
 subtitle: What it does now
 
+- Base system built from [Yocto](https://www.yoctoproject.org/)
 - Builds git repositories from core up to Hawaii, plus a few apps
 - Can build continuosly
-- Base system built from [Yocto](https://www.yoctoproject.org/)
 - Outputs different trees: runtime, runtime-debug, devel, devel-debug
 - Targets bare metal
 - Creates live images
@@ -106,23 +70,7 @@ subtitle: Ideas for the future
 
 ---
 
-title: Bundles
-
-- Multiple versions of the same application at the same time
-- OS updates decoupled from application updates
-- 1:1 relationship between a bundle and an application
-- Encourages ABI stability
-- Moves the packaging burden to the vendor
-
----
-
-title: Hawaii
-subtitle: Desktop Environment
-class: segue dark nobackground
-
----
-
-title: Philosophy
+title: Hawaii: philosophy
 class: big
 
 - Collaborate with upstream
@@ -169,7 +117,7 @@ title: Features on 0.2.0
 
 ---
 
-title: Features for upcoming 0.2.1
+title: Features for upcoming version
 
 - Switch between different layouts
 - First step towards desktop and mobile convergence
@@ -192,6 +140,15 @@ title: What's next?
 - Improved applications and task management
 - Freedesktop.org Notifications 1.2
 - More preference modules: keyboard, mouse, screens, ...
+
+---
+
+title: KDE Frameworks
+
+- Less dependencies than before
+- Code ready to be used, less duplication
+- More people involved, more stable code
+- Larger userbase
 
 ---
 
@@ -224,7 +181,14 @@ title: How do I get it?
 - Sources: [github.com/mauios](https://github.com/mauios)
 - AUR packages for Arch Linux
 - Binary packages for Arch Linux (x86_64) always updated
+- On going effort on Mer
 - Fedora: coming soon
+
+---
+
+title: Convergence
+
+Write less code, concentrate on what really changes.
 
 ---
 
