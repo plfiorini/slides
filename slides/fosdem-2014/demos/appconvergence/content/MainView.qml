@@ -61,6 +61,7 @@ Item {
 
             GroupBox {
                 anchors.fill: parent
+                anchors.margins: 50
                 title: "Choose a page"
 
                 Flow {
