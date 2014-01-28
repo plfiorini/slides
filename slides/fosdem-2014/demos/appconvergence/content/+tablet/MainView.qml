@@ -156,7 +156,7 @@ Item {
             Text {
                 font.pixelSize: 42
                 color: "white"
-                text: "Widget Gallery"
+                text: "Tablet"
             }
         }
     }

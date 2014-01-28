@@ -104,7 +104,7 @@ Item {
             x: backButton.x + backButton.width + 20
             anchors.verticalCenter: parent.verticalCenter
             color: "white"
-            text: "Widget Gallery"
+            text: "Phone"
         }
     }
 
