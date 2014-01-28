@@ -27,9 +27,9 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
-#include <QtQml/QQmlApplicationEngine>
 
 #include "qtquickcontrolsapplication.h"
+#include "convergencecontroller.h"
 #include "convergenceinterceptor.h"
 
 Q_LOGGING_CATEGORY(APPCONVERGENCE, "appconvergence")
@@ -61,17 +61,8 @@ int main(int argc, char *argv[])
 
     const QStringList hints = parser.positionalArguments();
 
-    ConvergenceInterceptor interceptor;
-    interceptor.setBasePath(QCoreApplication::applicationDirPath() + "/content");
-    interceptor.setPlatformHints(hints);
-
-    QQmlApplicationEngine engine;
-    engine.setUrlInterceptor(&interceptor);
-
-    QObject::connect(&interceptor, SIGNAL(reload(QString)),
-                     &engine, SLOT(load(QString)));
-
-    engine.load(QUrl::fromLocalFile(interceptor.filePath("main.qml")));
+    ConvergenceController controller;
+    controller.setPlatformHints(hints);
 
     return app.exec();
 }

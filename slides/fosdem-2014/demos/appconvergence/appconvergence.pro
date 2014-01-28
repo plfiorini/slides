@@ -1,6 +1,7 @@
 QT += qml quick
 TARGET = appconvergence
 !android: !ios: !blackberry: qtHaveModule(widgets): QT += widgets
+CONFIG += c++11
 
 include(src/src.pri)
 

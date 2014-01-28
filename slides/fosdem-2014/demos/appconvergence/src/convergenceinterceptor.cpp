@@ -23,6 +23,8 @@
  * $END_LICENSE$
  ***************************************************************************/
 
+#include <QtGui/QWindow>
+
 #include "qtquickcontrolsapplication.h"
 #include "convergenceinterceptor.h"
 
@@ -43,6 +45,7 @@ void ConvergenceInterceptor::setBasePath(const QString &path)
 void ConvergenceInterceptor::setPlatformHints(const QStringList &hints)
 {
     m_hints = hints;
+    emit reload(filePath("main.qml"));
 }
 
 QString ConvergenceInterceptor::filePath(const QString &fileName) const
@@ -103,7 +106,6 @@ void ConvergenceInterceptor::hintsChanged(const QStringList &hints)
     if (m_hints != hints) {
         // Ok, so hints are indeed change now we tell the engine that we want to reload
         // the main QML file
-        qDebug() << hints;
-        emit reload(filePath("main.qml"));
+        setPlatformHints(hints);
     }
 }
