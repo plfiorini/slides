@@ -4,8 +4,8 @@ var SLIDE_CONFIG = {
     title: 'The Maui Project',
     subtitle: 'Out of the Box Experience',
     eventInfo: {
-      title: 'QtDay 2014',
-      date: '01/18/2014'
+      title: 'FOSDEM 2014',
+      date: '01/02/2014'
     },
     useBuilds: true, // Default: true. False will turn off slide animation builds.
     usePrettify: true, // Default: true
@@ -26,7 +26,7 @@ var SLIDE_CONFIG = {
     company: 'Lead Developer<br>Maui Project',
     gplus: 'http://plus.google.com/117319527836202971314',
     twitter: '@plfiorini',
-    www: 'http://plfiorini.blogspot.com',
+    www: 'http://www.maui-project.org',
     github: 'http://github.com/plfiorini'
   }/*, {
     name: 'Second Name',
