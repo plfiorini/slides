@@ -1,25 +1,31 @@
 title: Me
 
+<img src="me.jpg" width="227" height="227" align="right">
+
+- Pier Luigi Fiorini
+- qtwayland contributor
+- IRC Freenode: plfiorini
+- Twitter: @plfiorini
+- GooglePlus: +PierLuigiFiorini
+
 ---
 
 title: What is this stuff?
 
-Maui:
-
-- Convenient way to distribute the desktop
-- GNU/Linux stack, Qt, Hawaii
-- Atomic, safe updates and upgrades (OSTree)
-- Download only what's changed, zlib compressed
-- Bundles instead of packages
-- Focused on Qt and desktop needs
-
 Hawaii:
 
 - Low footprint Wayland and QtQuick based desktop
-- Modular, less dependencies
+- Less dependencies
 - Adapt to different devices
-- Customizable layouts
-- Easier styling
+- Customizable layouts, easier styling and theming
+
+Maui:
+
+- Small distro: GNU/Linux stack, Qt, Hawaii
+- Convenient way to distribute the desktop
+- Atomic, safe updates and upgrades (OSTree)
+- Bundles instead of packages
+- Focused on Qt
 
 ---
 
@@ -30,6 +36,28 @@ content_class: flexbox vcenter
 This is during yum update: the system is in an inconsistent state
 
 ![During an upgrade](during-upgrade.png)
+
+---
+
+title: mauibuild
+subtitle: What it does now
+
+- Written in Python, derived from gnome-ostree
+- Base system built from [Yocto](https://www.yoctoproject.org/)
+- Builds git repositories listed in a JSON manifest
+- Can build continuosly
+- Outputs different trees: runtime, runtime-debug, devel, devel-debug
+- Targets bare metal
+- Creates live images
+
+---
+
+title: mauibuild
+subtitle: Ideas for the future
+
+- Pick a more complete base system (e.g. Mer, Fedora)
+- Build a few things from git sources
+- Smoke tests and QA
 
 ---
 
@@ -48,38 +76,17 @@ Advantages:
 
 ---
 
-title: mauibuild
-subtitle: What it does now
-
-- Base system built from [Yocto](https://www.yoctoproject.org/)
-- Builds git repositories from core up to Hawaii, plus a few apps
-- Can build continuosly
-- Outputs different trees: runtime, runtime-debug, devel, devel-debug
-- Targets bare metal
-- Creates live images
-
----
-
-title: mauibuild
-subtitle: Ideas for the future
-
-- Pick a more complete base system (e.g. Mer, Fedora) and only build Qt and Hawaii
-- Focus on continuous integration, smoke tests and QA
-- Only target virtualized environments
-- No security updates
-
----
-
 title: Hawaii: philosophy
 class: big
 
-- Collaborate with upstream
-- Reuse other libraries when possible
-- Avoid unnecessary or bloated stuff
 - Only support Wayland
-- Adapt to diffent form factors
+- Minimalist UI
+- Adapt to diffent devices and form factors
 - Modular desktop with components
-- Easy and reliable API for styles
+- Easy styling and theming thanks to QML
+- Promote third party applications
+- Collaborate with upstream when possible
+- Reuse other libraries when possible
 
 ---
 
@@ -88,6 +95,15 @@ class: fill
 content_class: flexbox vcenter
 
 ![Too much stuff](too_much_stuff.png)
+
+---
+
+title: KDE Frameworks
+
+- Less dependencies (especially with tier 1 libs)
+- Code ready to be used, less duplication
+- More people involved, more stable code
+- Larger userbase
 
 ---
 
@@ -100,59 +116,15 @@ content_class: flexbox vcenter
 
 ---
 
-title: Features on 0.2.0
+title: Convergence
 
-- Multiple screens support without primary and secondary outputs
-- Launcher, Panel and AppChooser on multiple pages
-- Background with crossfade effect
-- Modal dialogs, overlays and popups
-- Multiple workspaces and switcher
-- Windows switcher and Exposé-like presentation
-- Lock screen
-- PolicyKit agent
-- Notifications
-- Volume control keys
-- Grouped indicators and consolidated menu
-- QML styles
+We don't have laptops and desktops only.
+
+Common business logic, different presentation.
 
 ---
 
-title: Features for upcoming version
-
-- Switch between different layouts
-- First step towards desktop and mobile convergence
-- Customizable layouts
-- Loadable elements
-- Replaceable components (lock screen, ...)
-- More modularization
-- Screen saver
-- Animated wallpapers
-- Workspaces overview
-- Dropdown windows
-- Wayland/Weston 1.4 support
-- Possibly more core apps: Weather and Cinema
-
----
-
-title: What's next?
-
-- Port SDDM to Wayland
-- Improved applications and task management
-- Freedesktop.org Notifications 1.2
-- More preference modules: keyboard, mouse, screens, ...
-
----
-
-title: KDE Frameworks
-
-- Less dependencies than before
-- Code ready to be used, less duplication
-- More people involved, more stable code
-- Larger userbase
-
----
-
-title: Styles
+title: Overlay styles
 
 <pre class="prettyprint" data-lang="qml">
 import QtQuick 2.0
@@ -176,6 +148,99 @@ OverlayStyle {
 
 ---
 
+title: Popup style 1/2
+
+<pre class="prettyprint" data-lang="qml">
+import QtQuick 2.0
+import QtGraphicalEffects 1.0
+import Fluid.Ui 1.0
+import Hawaii.Shell.Styles.Base 1.0
+
+PopupStyle {
+    padding { left: 8; top: 8; right: 8; bottom: 8 }
+    panel: Item {
+        Rectangle {
+            id: border
+            anchors { fill: parent; margins: 8 }
+            border.color: "#999"
+            radius: 6
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#f4f4f4" }
+                GradientStop { position: 1.0; color: "#dcdcdc" }
+            }
+            visible: false
+</pre>
+
+---
+
+title: Popup style 2/2
+
+<pre class="prettyprint" data-lang="qml">
+            NoiseBackground {
+                anchors { fill: parent; margins: 3 }
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: "#f4f4f4" }
+                    GradientStop { position: 1.0; color: "#dcdcdc" }
+                }
+            }
+        }
+        DropShadow {
+            anchors.fill: border; source: border
+            radius: 8; samples: 16
+            fast: true
+            spread: 0
+            color: Qt.rgba(0, 0, 0, 0.5)
+            transparentBorder: true
+        }
+    }
+}
+</pre>
+
+---
+
+title: Features on 0.2.0
+
+- Multiple screens support without primary and secondary outputs
+- Launcher, Panel and AppChooser on multiple pages
+- Background with crossfade effect
+- Modal dialogs, overlays and popups
+- Multiple workspaces and switcher
+- Windows switcher and Exposé-like presentation
+- Lock screen
+- PolicyKit agent
+- Notifications
+- Volume control keys
+- Grouped indicators and consolidated menu
+- Style API 0.1
+
+---
+
+title: Features for upcoming version
+
+- Switch between different layouts
+- First step towards desktop and mobile convergence
+- Customizable layouts
+- Loadable elements
+- Replaceable components (lock screen, ...)
+- More modularization
+- Screen saver
+- Animated wallpapers
+- Workspaces overview
+- Dropdown windows
+- Weston 1.4 support
+- Possibly more core apps: Weather and Cinema
+
+---
+
+title: What's next?
+
+- Port SDDM to Wayland
+- Improved applications and task management
+- Freedesktop.org Notifications 1.2
+- More preference modules: keyboard, mouse, screens, ...
+
+---
+
 title: How do I get it?
 
 - Sources: [github.com/mauios](https://github.com/mauios)
@@ -183,12 +248,6 @@ title: How do I get it?
 - Binary packages for Arch Linux (x86_64) always updated
 - On going effort on Mer
 - Fedora: coming soon
-
----
-
-title: Convergence
-
-Write less code, concentrate on what really changes.
 
 ---
 
