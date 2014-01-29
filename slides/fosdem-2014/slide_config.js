@@ -24,7 +24,7 @@ var SLIDE_CONFIG = {
   presenters: [{
     name: 'Pier Luigi Fiorini',
     company: 'Lead Developer<br>Maui Project',
-    gplus: 'http://plus.google.com/117319527836202971314',
+    gplus: 'http://plus.google.com/+PierLuigiFiorini',
     twitter: '@plfiorini',
     www: 'http://www.maui-project.org',
     github: 'http://github.com/plfiorini'
