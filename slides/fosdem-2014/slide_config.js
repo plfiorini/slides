@@ -1,8 +1,8 @@
 var SLIDE_CONFIG = {
   // Slide settings
   settings: {
-    title: 'The Maui Project',
-    subtitle: 'Out of the Box Experience',
+    title: 'Hawaii',
+    subtitle: '(Maui Project)',
     eventInfo: {
       title: 'FOSDEM 2014',
       date: '01/02/2014'

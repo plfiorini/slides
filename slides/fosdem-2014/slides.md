@@ -23,7 +23,7 @@ Maui:
 
 - Small distro: GNU/Linux stack, Qt, Hawaii
 - Convenient way to distribute the desktop
-- Atomic, safe updates and upgrades (OSTree)
+- Atomic and safe updates (OSTree)
 - Bundles instead of packages
 - Focused on Qt
 
@@ -118,9 +118,9 @@ content_class: flexbox vcenter
 
 title: Convergence
 
-We don't have laptops and desktops only.
-
-Common business logic, different presentation.
+- Single code base
+- Different layout for different devices
+- QFileSelector and QQmlAbstractUrlInterceptor
 
 ---
 
